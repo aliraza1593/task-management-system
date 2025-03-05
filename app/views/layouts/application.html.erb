@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Manager</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-blue-600 p-4 text-white">
+    <div class="max-w-4xl mx-auto flex justify-between">
+      <a href="<%= root_path %>" class="font-bold">Task Manager</a>
+      <div>
+        <%= link_to "Tasks", tasks_path, class: "mr-4" %>
+        <%= link_to "New Task", new_task_path, class: "bg-white text-blue-600 px-3 py-1 rounded shadow" %>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto mt-6">
+    <%= yield %>
+  </div>
+</body>
+</html>
