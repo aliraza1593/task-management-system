@@ -1,0 +1,28 @@
+<div class="max-w-3xl mx-auto mt-8">
+  <h1 class="text-2xl font-bold"><%= @task.title %></h1>
+
+  <h2 class="text-xl font-semibold mt-6">Subtasks</h2>
+  <ul>
+    <% @task.subtasks.each do |subtask| %>
+      <li class="flex items-center space-x-2 mt-2">
+        <input type="checkbox" <%= subtask.completed_status ? "checked" : "" %> disabled>
+        <span class="<%= subtask.completed_status ? 'line-through text-gray-500' : '' %>"><%= subtask.title %></span>
+        
+        <% unless subtask.completed_status %>
+          <%= button_to "Complete", task_subtask_path(@task,subtask), method: :patch, class: "bg-green-500 text-white px-2 py-1 rounded ml-2" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h3 class="text-lg font-semibold mt-6">Add a Subtask</h3>
+  <%= form_with model: @task.subtasks.new, url: task_subtasks_path(@task), method: :post, local: true do |f| %>
+    <div>
+      <%= f.text_field :title, class: "border p-2 rounded w-full", placeholder: "Enter subtask title", required: true %>
+    </div>
+    <div>
+      <%= f.submit "Add Subtask", class: "bg-blue-500 text-white px-4 py-2 rounded mt-2" %>
+    </div>
+  <% end %>
+
+</div>
